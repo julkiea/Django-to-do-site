@@ -58,7 +58,7 @@ def register_user(request):
         if form.is_valid():
 
             # Save new user in data base
-            form.save
+            form.save()
 
             # Get username and password from cleaned data from form
             username = form.cleaned_data['username']
@@ -66,15 +66,22 @@ def register_user(request):
 
             # Authenticate user
             user = authenticate(username=username, password=password)
+            
+            if user is not None:
 
-            # If authenticating is success
-            messages.success(request, "You have been signed in successfully")
+                login(request, user)
 
-            # Redirect home
-            return redirect('home')
-        
-        else:
-            form = SignUpForm()
-            return render(request, 'register.html', {'form': form})
-        
+                # If authentication is successful
+                messages.success(request, "You have been signed up successfully")
+
+                # Redirect home
+                return redirect('home')
+            
+            else:
+                messages.success(request, "Authentication failed. Please try again.")
+ 
+    else:
+        form = SignUpForm()
+        return render(request, 'register.html', {'form':form})
+
     return render(request, 'register.html', {'form': form})
