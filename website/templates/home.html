@@ -2,6 +2,37 @@
 
 {% block content %}
 
-<h1>Hello</h1>
+
+
+{% if user.is_authenticated %}
+
+<h1>There will be a table with to do tasks</h1>
+
+{% else %}
+
+<div class = "col-md-6 offset-md-3">
+    <h1>Log in</h1>
+    <br/>
+    <form method="POST" action="{% url 'home' %}">
+        {% csrf_token %}
+    
+            <div class="mb-3">
+    
+              <input type="text" class="form-control" name="username", placeholder="Username" required>
+    
+            </div>
+            <div class="mb-3">
+    
+              <input type="password" class="form-control" name="password", placeholder="Password" required>
+            </div>
+    
+            <button type="submit" class="btn btn-outline-info">Log in</button>
+    
+    </form>
+    </div>
+</div>
+
+
+{% endif %}
 
 {% endblock %}
