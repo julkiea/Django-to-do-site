@@ -21,7 +21,7 @@ def home(request):
             login(request, user)
              
             # Display message 
-            messages.success(request, 'You have been logged in successfully')
+            messages.success(request, 'You have been logged in successfully!')
 
             # Redirect home
             return redirect('home')
@@ -40,3 +40,7 @@ def home(request):
         return render(request, 'home.html', {})
 
 
+def logout_user(request):
+    logout(request)
+    messages.success(request, "You have been logged out successfully!")
+    return redirect('home')
