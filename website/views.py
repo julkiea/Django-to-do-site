@@ -3,6 +3,11 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from .forms import SignUpForm
 
+
+def activate_email(request, user, to_email):
+    messages.success(request, f'Dear {user}, please go to your email: {to_email}, inbox and click \
+                     on received activation link to confirm and complete the registration. Note: Check your spam folder.')
+
 def home(request):
     
     # Check if logging in
@@ -57,9 +62,18 @@ def register_user(request):
         # Check if form is valid
         if form.is_valid():
 
-            # Save new user in data base
-            form.save()
+            # Create a user but don't save user in database
+            user = form.save(commit = False)
+            user.is_active = False
 
+            # Save a user
+            user.save()
+            
+            activate_email(request, user, form.cleaned_data.get('email'))
+            # Redirect home
+            return redirect('home')
+
+            """
             # Get username and password from cleaned data from form
             username = form.cleaned_data['username']
             password = form.cleaned_data['password1']
@@ -79,7 +93,7 @@ def register_user(request):
             
             else:
                 messages.success(request, "Authentication failed. Please try again.")
- 
+ """
     else:
         form = SignUpForm()
         return render(request, 'register.html', {'form':form})
