@@ -2,37 +2,37 @@
 
 {% block content %}
 
-
-
-{% if user.is_authenticated %}
-
-<h1>There will be a table with to do tasks</h1>
-
-{% else %}
-
-<div class = "col-md-6 offset-md-3">
-    <h1>Log in</h1>
-    <br/>
-    <form method="POST" action="{% url 'home' %}">
-        {% csrf_token %}
-    
-            <div class="mb-3">
-    
-              <input type="text" class="form-control" name="username", placeholder="Username" required>
-    
-            </div>
-            <div class="mb-3">
-    
-              <input type="password" class="form-control" name="password", placeholder="Password" required>
-            </div>
-    
-            <button type="submit" class="btn btn-outline-info">Log in</button>
-    
-    </form>
-    </div>
-</div>
-
-
-{% endif %}
+<table class="table table-striped table-hover table-bordered">
+  <thead class="table-info">
+    <tr>
+      <th scope="col">Title</th>
+      <th scope="col">Description</th>
+      <th scope="col">Category</th>
+      <th scope="col">Priority</th>
+      <th scope="col">Deadline</th>
+      <th scope="col">Created At</th>
+      <th scope="col">Completed</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% if tasks %}
+      {% for task in tasks %}
+        <tr>
+          <td>{{ task.title }}</td>
+          <td>{{ task.description }}</td>
+          <td>{{ task.category }}</td>
+          <td>{{ task.priority }}</td>
+          <td>{{ task.deadline }}</td>
+          <td>{{ task.created_at }}</td>
+          <td>{{ task.completed }}</td>
+        </tr>
+      {% endfor %}
+    {% else %}
+      <tr>
+        <td colspan="7">No tasks found.</td>
+      </tr>
+    {% endif %}
+  </tbody>
+</table>
 
 {% endblock %}
