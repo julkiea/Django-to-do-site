@@ -2,7 +2,7 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
-from .forms import SignUpForm
+from .forms import SignUpForm, AddATaskForm
 from .models import Task
 
 
@@ -106,3 +106,39 @@ def register_user(request):
         return render(request, 'register.html', {'form':form})
 
     return render(request, 'register.html', {'form': form})
+
+
+def add_task(request):
+
+    # Check if logged in 
+    if request.user.is_authenticated:
+
+        # Check if filling the form
+        if request.method == 'POST':
+            form = AddATaskForm(request.POST)
+
+            # Check if form is valid
+            if form.is_valid():
+
+                task = form.save(commit=False)
+
+                # Set the user to the currently logged in user
+                task.user = request.user  
+
+                # Save the task
+                task.save()
+                messages.success(request, "To-do task has been added successfully!")
+                
+                # Redirect home
+                return redirect('home')
+            
+        # If not filling the form
+        else:
+            form = AddATaskForm()
+        return render(request, 'add_task.html', {'form': form})
+    
+    # If user is not logged in
+    else:
+        messages.success(request, "You must be logged in. Log in and try again...")
+        return redirect('home')
+
