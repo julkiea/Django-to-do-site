@@ -1,6 +1,7 @@
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from django import forms
+from .models import Task
 
 
 # Creating SignUpForm class
@@ -30,3 +31,23 @@ class SignUpForm(UserCreationForm):
         self.fields['password2'].widget.attrs['placeholder'] = 'Confirm password'
         self.fields['password2'].label = ''
         self.fields['password2'].help_text = '<span class="form-text text-muted"><small>Enter the same password as before, for verification.</small></span>'
+
+
+
+# Creating AddATaskForm
+class AddATaskForm(forms.ModelForm):
+    PRIORITY_CHOICES = [
+        ('L', 'Low'),
+        ('M', 'Medium'),
+        ('H', 'High'),
+    ]
+    title = forms.CharField(label="Title", widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Enter task title'}))
+    description = forms.CharField(label="Description", widget=forms.Textarea(attrs={'class': 'form-control', 'placeholder': 'Enter task description'}))
+    category = forms.CharField(label="Category", required=False, widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Enter task category'}))
+    deadline = forms.DateTimeField(label="Deadline", required=False, widget=forms.DateTimeInput(attrs={'class': 'form-control', 'placeholder': 'Select deadline', 'type': 'datetime-local'}))
+    priority = forms.ChoiceField(label="Priority", choices=PRIORITY_CHOICES, widget=forms.Select(attrs={'class': 'form-control'}))
+    completed = forms.BooleanField(label="Completed", required=False)
+
+    class Meta():
+        model = Task
+        fields = ('title', 'description', 'category', 'deadline', 'priority', 'completed')
