@@ -1,15 +1,22 @@
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from .forms import SignUpForm
+from .models import Task
 
 
 def activate_email(request, user, to_email):
     messages.success(request, f'Dear {user}, please go to your email: {to_email}, inbox and click \
                      on received activation link to confirm and complete the registration. Note: Check your spam folder.')
 
+@login_required
 def home(request):
     
+    tasks = Task.objects.filter(user=request.user)
+    return render(request, 'home.html', {'tasks': tasks})
+
+def login_user(request):
     # Check if logging in
     if request.method == "POST":
         
@@ -37,19 +44,19 @@ def home(request):
             messages.success(request, 'An error occurred while logging in, please try again!')
             
             # Redirect home
-            return redirect('home')
+            return redirect('login.html')
     
     # If not logging in
     else:
 
         # Render home page
-        return render(request, 'home.html', {})
+        return render(request, 'login.html')
 
 
 def logout_user(request):
     logout(request)
     messages.success(request, "You have been logged out successfully!")
-    return redirect('home')
+    return redirect('login')
 
 def register_user(request):
 
@@ -62,18 +69,18 @@ def register_user(request):
         # Check if form is valid
         if form.is_valid():
 
-            # Create a user but don't save user in database
-            user = form.save(commit = False)
-            user.is_active = False
+            # Create a user 
+            form.save()
+            """user.is_active = False
 
             # Save a user
             user.save()
             
             activate_email(request, user, form.cleaned_data.get('email'))
             # Redirect home
-            return redirect('home')
+            return redirect('home')"""
 
-            """
+            
             # Get username and password from cleaned data from form
             username = form.cleaned_data['username']
             password = form.cleaned_data['password1']
@@ -93,7 +100,7 @@ def register_user(request):
             
             else:
                 messages.success(request, "Authentication failed. Please try again.")
- """
+ 
     else:
         form = SignUpForm()
         return render(request, 'register.html', {'form':form})
