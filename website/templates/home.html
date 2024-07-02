@@ -2,9 +2,10 @@
 
 {% block content %}
 
-<table class="table table-striped table-hover table-bordered">
+<table class="table table-striped table-hover table-bordered" >
   <thead class="table-info">
     <tr>
+      <th scope="col">ID</th>
       <th scope="col">Title</th>
       <th scope="col">Description</th>
       <th scope="col">Category</th>
@@ -18,6 +19,7 @@
     {% if tasks %}
       {% for task in tasks %}
         <tr>
+          <td><a href = "{% url 'task' task.id %}">{{ task.id }}</a></td>
           <td>{{ task.title }}</td>
           <td>{{ task.description }}</td>
           <td>{{ task.category }}</td>
