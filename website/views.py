@@ -156,3 +156,17 @@ def task(request, pk):
     else: 
         messages.success(request, "You must be logged in! Log in and try again...")
         return redirect('home')
+    
+def delete_task(request, pk):
+    if request.user.is_authenticated:
+        try:
+            task_to_delete = get_object_or_404(Task, id=pk, user=request.user)
+            task_to_delete.delete()
+            messages.success(request, "Task has been deleted successfully")
+        except Task.DoesNotExist:
+            messages.error(request, "Task does not exist.")
+        return redirect('home')
+        
+    else:
+        messages.success(request, "You must be logged in! Log in and try again...")
+        return redirect('home')
