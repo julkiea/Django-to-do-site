@@ -44,7 +44,7 @@ def login_user(request):
             messages.success(request, 'An error occurred while logging in, please try again!')
             
             # Redirect home
-            return redirect('login.html')
+            return redirect('home')
     
     # If not logging in
     else:
@@ -162,11 +162,25 @@ def delete_task(request, pk):
         try:
             task_to_delete = get_object_or_404(Task, id=pk, user=request.user)
             task_to_delete.delete()
-            messages.success(request, "Task has been deleted successfully")
+            messages.success(request, "Task has been deleted successfully!")
         except Task.DoesNotExist:
             messages.error(request, "Task does not exist.")
         return redirect('home')
         
+    else:
+        messages.success(request, "You must be logged in! Log in and try again...")
+        return redirect('home')
+
+
+def edit_task(request, pk):
+    if request.user.is_authenticated:
+        task_to_edit = get_object_or_404(Task, id=pk, user=request.user)
+        form = AddATaskForm(request.POST or None, instance=task_to_edit)
+        if form.is_valid():
+            form.save()
+            messages.success(request, "Task has been edited successfully!")
+            return redirect('home')
+        return render(request, 'edit_task.html', {'form': form})
     else:
         messages.success(request, "You must be logged in! Log in and try again...")
         return redirect('home')
