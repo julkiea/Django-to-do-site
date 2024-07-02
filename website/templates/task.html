@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="card border-info mb-3">
+    <h5 class="card-header">
+        {{ task.title }}
+    
+    </h5>
+    <div class="card-body">
+        <p class="card-text">
+            <strong>Description:  </strong>{{ task.description }}</p>
+        <p class="card-text">
+            <strong>Category:  </strong>{{ task.category }}</p>
+        <p class="card-text">
+            <strong>Priority:  </strong>{{ task.priority }}</p>
+        <p class="card-text">
+            <strong>Deadline:  </strong>{{ task.deadline }}</p>
+        <p class="card-text">
+            <strong>Created at:  </strong>{{ task.created_at }}</p>
+
+
+
+{% endblock %}
