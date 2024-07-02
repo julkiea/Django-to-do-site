@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn btn-primary">EDIT</button>
+    <a href = "{% url 'home' %}" class = "btn btn-secondary"> Back</a>
+</form>
+<br/>
+<br/>
+<br/>
+{% endblock %}
