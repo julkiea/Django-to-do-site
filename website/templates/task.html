@@ -23,5 +23,5 @@
 
     <a href = "{% url 'home' %}" class = "btn btn-secondary"> BACK</a>
     <a href = "{% url 'delete_task' task.id %}" class = "btn btn-danger"> DELETE </a>
-
+    <a href = "{% url 'edit_task' task.id %}" class = "btn btn-primary"> EDIT </a>
 {% endblock %}
