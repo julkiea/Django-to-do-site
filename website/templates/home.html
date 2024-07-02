@@ -13,6 +13,7 @@
       <th scope="col">Deadline</th>
       <th scope="col">Created At</th>
       <th scope="col">Completed</th>
+      <th scope="col"></th>
     </tr>
   </thead>
   <tbody>
@@ -27,6 +28,9 @@
           <td>{{ task.deadline }}</td>
           <td>{{ task.created_at }}</td>
           <td>{{ task.completed }}</td>
+          <td>
+            <a href="{% url 'delete_task' task.id %}" class="btn btn-danger"><i class="fas fa-trash"></i></a> 
+          </td>
         </tr>
       {% endfor %}
     {% else %}
