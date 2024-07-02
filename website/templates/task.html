@@ -17,7 +17,11 @@
             <strong>Deadline:  </strong>{{ task.deadline }}</p>
         <p class="card-text">
             <strong>Created at:  </strong>{{ task.created_at }}</p>
+    </div>
+</div>
+<br/>
 
-
+    <a href = "{% url 'home' %}" class = "btn btn-secondary"> BACK</a>
+    <a href = "{% url 'delete_task' task.id %}" class = "btn btn-danger"> DELETE </a>
 
 {% endblock %}
