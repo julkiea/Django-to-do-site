@@ -1,5 +1,5 @@
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from .forms import SignUpForm, AddATaskForm
@@ -142,3 +142,17 @@ def add_task(request):
         messages.success(request, "You must be logged in. Log in and try again...")
         return redirect('home')
 
+def task(request, pk):
+    # Check if logged in 
+    if request.user.is_authenticated:
+        try:
+            task = get_object_or_404(Task, id=pk, user=request.user)
+            return render(request, 'task.html', {'task': task})
+        except Task.DoesNotExist:
+            messages.error(request, "Task does not exist.")
+            return redirect('home')
+    
+    # If not logged in 
+    else: 
+        messages.success(request, "You must be logged in! Log in and try again...")
+        return redirect('home')
