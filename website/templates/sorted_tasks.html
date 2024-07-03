@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<table class="table table-striped table-hover table-bordered" >
+    <thead class="table-info">
+      <tr>
+        <th scope="col">ID</th>
+        <th scope="col">Title</th>
+        <th scope="col">Description</th>
+        <th scope="col">Category</th>
+        <th scope="col">Priority</th>
+        <th scope="col">Deadline</th>
+        <th scope="col">Created At</th>
+        <th scope="col">Completed</th>
+        <th scope="col"></th>
+  
+      </tr>
+    </thead>
+    <tbody>
+      {% if tasks %}
+        {% for task in tasks %}
+          <tr>
+            <td><a href = "{% url 'task' task.id %}">{{ task.id }}</a></td>
+            <td>{{ task.title }}</td>
+            <td>{{ task.description }}</td>
+            <td>{{ task.category }}</td>
+            <td>{{ task.priority }}</td>
+            <td>{{ task.deadline }}</td>
+            <td>{{ task.created_at }}</td>
+            <td>{{ task.completed }}</td>
+            <td>
+              <a href="{% url 'complete_task' task.id %}" class="btn btn-success"><i class="fas fa-check-square"></i></a> 
+  
+              <a href="{% url 'edit_task' task.id %}" class="btn btn-primary"><i class="fas fa-edit"></i></a> 
+              
+              <a href="{% url 'delete_task' task.id %}" class="btn btn-danger"><i class="fas fa-trash"></i></a> 
+            </td>
+            
+          </tr>
+        {% endfor %}
+      {% else %}
+        <tr>
+          <td colspan="7">No tasks found.</td>
+        </tr>
+      {% endif %}
+    </tbody>
+  </table>
+  
+  
+  {% endblock %}
