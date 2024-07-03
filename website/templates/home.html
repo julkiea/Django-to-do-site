@@ -14,7 +14,7 @@
       <th scope="col">Created At</th>
       <th scope="col">Completed</th>
       <th scope="col"></th>
-      <th scope="col"></th>
+
     </tr>
   </thead>
   <tbody>
@@ -30,11 +30,13 @@
           <td>{{ task.created_at }}</td>
           <td>{{ task.completed }}</td>
           <td>
+            <a href="{% url 'complete_task' task.id %}" class="btn btn-success"><i class="fas fa-check-square"></i></a> 
+
             <a href="{% url 'edit_task' task.id %}" class="btn btn-primary"><i class="fas fa-edit"></i></a> 
-          </td>
-          <td>
+
             <a href="{% url 'delete_task' task.id %}" class="btn btn-danger"><i class="fas fa-trash"></i></a> 
           </td>
+          
         </tr>
       {% endfor %}
     {% else %}
@@ -44,5 +46,6 @@
     {% endif %}
   </tbody>
 </table>
+
 
 {% endblock %}
