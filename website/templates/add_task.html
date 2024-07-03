@@ -5,6 +5,7 @@
 <form method="post">
     {% csrf_token %}
     {{ form.as_p }}
+    <a href = "{% url 'home' %}" class = "btn btn-secondary"> BACK</a>
     <button type="submit" class="btn btn-primary">Add to-do</button>
 </form>
 <br/>
