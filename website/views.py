@@ -184,3 +184,20 @@ def edit_task(request, pk):
     else:
         messages.success(request, "You must be logged in! Log in and try again...")
         return redirect('home')
+    
+
+def complete_task(request, pk):
+    if request.user.is_authenticated:
+        task_to_complete = get_object_or_404(Task, id=pk, user = request.user)
+        if task_to_complete.completed == False:
+            task_to_complete.completed = True
+            task_to_complete.save()
+            messages.success(request, f"Congratulations! You have completed task : {task_to_complete.title}")
+            return redirect('home')
+        else:
+            messages.success(request, "This task is already completed.")
+            return redirect('home')
+    
+    else:
+        messages.success(request, "You must be logged in! Log in and try again...")
+        return redirect('home') 
