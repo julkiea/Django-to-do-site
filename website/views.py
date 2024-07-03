@@ -201,3 +201,11 @@ def complete_task(request, pk):
     else:
         messages.success(request, "You must be logged in! Log in and try again...")
         return redirect('home') 
+    
+def sort_tasks(request, sort_by):
+    if request.user.is_authenticated:
+        tasks = Task.objects.filter(user=request.user).order_by(sort_by)
+        return render(request, 'home.html', {'tasks': tasks})
+    else:
+        messages.success(request, "You must be logged in! Log in and try again...")
+        return redirect('home')
