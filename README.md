@@ -43,23 +43,30 @@ It's Django To-Do App! This is a simple yet powerful task management application
     ```
 
 6. Create a `.env` file in the project root directory and set your environment variables:
-    ```bash
+     ```bash
     # Example .env file
     SECRET_KEY=my_secret_key_value
     DEBUG=True
     ```
+     
+8. 2. Generate a new secret key. You can use the following Python script to generate one:
 
-7. Apply migrations:
+   ```python
+   import secrets
+   print(secrets.token_urlsafe(50))
+
+
+9. Apply migrations:
     ```bash
     python manage.py migrate
     ```
 
-8. Create a superuser to access the admin panel:
+10. Create a superuser to access the admin panel:
     ```bash
     python manage.py createsuperuser
     ```
 
-9. Run the development server:
+11. Run the development server:
     ```bash
     python manage.py runserver
     ```
