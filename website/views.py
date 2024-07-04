@@ -209,3 +209,22 @@ def sort_tasks(request, sort_by):
     else:
         messages.success(request, "You must be logged in! Log in and try again...")
         return redirect('home')
+    
+def filter_tasks(request):
+    if request.user.is_authenticated:
+        tasks = Task.objects.filter(user=request.user)
+
+        priority = request.GET.get('priority')
+        completed = request.GET.get('completed')
+
+        if priority:
+            tasks = tasks.filter(priority=priority)
+
+        if completed is not None:
+            completed = completed.lower() == 'true'
+            tasks = tasks.filter(completed=completed)
+
+        return render(request, 'home.html', {'tasks': tasks})
+    else:
+        messages.success(request, "You must be logged in! Log in and try again...")
+        return redirect('home')
