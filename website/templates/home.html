@@ -20,9 +20,12 @@
    Filter
   </button>
   <ul class="dropdown-menu">
-    <li><a class="dropdown-item" href="#">Action</a></li>
-    <li><a class="dropdown-item" href="#">Another action</a></li>
-    <li><a class="dropdown-item" href="#">Something else here</a></li>
+    <li><a class="dropdown-item" href="{% url 'filter_tasks' %}?completed=true">Completed: True</a></li>
+    <li><a class="dropdown-item" href="{% url 'filter_tasks' %}?completed=false">Completed: False</a></li>
+    <li><a class="dropdown-item" href="{% url 'filter_tasks' %}?priority=L">Priority: Low</a></li>
+    <li><a class="dropdown-item" href="{% url 'filter_tasks' %}?priority=M">Priority: Medium</a></li>
+    <li><a class="dropdown-item" href="{% url 'filter_tasks' %}?priority=H">Priority: High</a></li>
+    <li><a class="dropdown-item" href="{% url 'home' %}">Show everything</a></li>
   </ul>
 </div>
 <br/>
