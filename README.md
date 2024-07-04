@@ -18,7 +18,7 @@ It's Django To-Do App! This is a simple yet powerful task management application
 1. Clone the repository:
    
     ```bash
-    git clone https://github.com/yourusername/todo-app.git
+    git clone https://github.com/julkiea/Django-to-do-site
     cd todo-app
     ```
 
