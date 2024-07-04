@@ -49,7 +49,7 @@ It's Django To-Do App! This is a simple yet powerful task management application
     DEBUG=True
     ```
      
-8. 2. Generate a new secret key. You can use the following Python script to generate one:
+8. Generate a new secret key. You can use the following Python script to generate one:
 
    ```python
    import secrets
