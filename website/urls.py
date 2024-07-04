@@ -13,4 +13,5 @@ urlpatterns = [
     path('task/<int:pk>/complete/', views.complete_task, name ='complete_task'),
     path('sort_tasks/<str:sort_by>/', views.sort_tasks, name ='sorted_task'),
     path('filter_tasks/', views.filter_tasks, name = 'filter_tasks' )
+
 ]

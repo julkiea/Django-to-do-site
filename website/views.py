@@ -4,6 +4,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from .forms import SignUpForm, AddATaskForm
 from .models import Task
+from django.http import JsonResponse
 
 
 def activate_email(request, user, to_email):
@@ -228,3 +229,4 @@ def filter_tasks(request):
     else:
         messages.success(request, "You must be logged in! Log in and try again...")
         return redirect('home')
+    
