@@ -19,7 +19,7 @@ It's Django To-Do App! This is a simple yet powerful task management application
    
     ```bash
     git clone https://github.com/julkiea/Django-to-do-site
-    cd todo-app
+    cd Django-to-do-site
     ```
 
 2. Install `virtualenv`:
