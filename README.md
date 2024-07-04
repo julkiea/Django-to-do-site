@@ -42,17 +42,24 @@ It's Django To-Do App! This is a simple yet powerful task management application
     pip install -r requirements.txt
     ```
 
-6. Apply migrations:
+6. Create a `.env` file in the project root directory and set your environment variables:
+    ```bash
+    # Example .env file
+    SECRET_KEY=my_secret_key_value
+    DEBUG=True
+    ```
+
+7. Apply migrations:
     ```bash
     python manage.py migrate
     ```
 
-7. Create a superuser to access the admin panel:
+8. Create a superuser to access the admin panel:
     ```bash
     python manage.py createsuperuser
     ```
 
-8. Run the development server:
+9. Run the development server:
     ```bash
     python manage.py runserver
     ```
