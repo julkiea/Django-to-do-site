@@ -71,3 +71,5 @@ It's Django To-Do App! This is a simple yet powerful task management application
     python manage.py runserver
     ```
 
+
+    ![image](https://github.com/user-attachments/assets/37672064-ff83-4f23-a006-7b3c12b33503)
