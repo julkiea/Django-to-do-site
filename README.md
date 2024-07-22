@@ -2,7 +2,7 @@
 
 It's Django To-Do App! This is a simple yet powerful task management application built with Django. The app allows users to perform CRUD (Create, Read, Update, Delete) operations effectively, enabling them to manage tasks with features like registration, login, task addition, deletion, editing, sorting, and filtering. Each task can have attributes such as category, deadline, and priority, providing a comprehensive toolset for organizing tasks efficiently.
 
-## Features
+## Features ✨
 
 - User registration and login
 - Adding new tasks
