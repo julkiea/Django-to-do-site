@@ -13,7 +13,7 @@ It's Django To-Do App! This is a simple yet powerful task management application
 - Signing task as completed
 
 
-## Installation
+## Installation 🔧
 
 1. Clone the repository:
    
